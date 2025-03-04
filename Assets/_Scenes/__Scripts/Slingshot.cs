@@ -9,6 +9,9 @@ public class Slingshot : MonoBehaviour {
     public float velocityMult = 10f;
     public GameObject projLinePrefab;
 
+    public AudioClip pullSound;  // Sound when pulling the rubber band back
+    public AudioClip snapSound;  // Sound when snapping the rubber band
+
     [Header("Dynamic")]
     public GameObject launchPoint;
     public Vector3 launchPos;
@@ -18,6 +21,10 @@ public class Slingshot : MonoBehaviour {
     // Add these for the rubber band
     private LineRenderer rubberBandLine; // To visualize the rubber band
     private Vector3 rubberBandAnchorPos; // The anchor position of the rubber band (slingshot point)
+
+    private AudioSource audioSource; // AudioSource to play the sound
+
+    private bool isPullingSoundPlaying = false;  // Flag to track whether the pull sound is playing
 
     void Awake() {
         Transform launchPointTrans = transform.Find("LaunchPoint");
@@ -34,6 +41,10 @@ public class Slingshot : MonoBehaviour {
         rubberBandLine.endColor = new Color(0.6f, 0.3f, 0.1f);
         rubberBandLine.positionCount = 2;
         rubberBandLine.enabled = false; // Ensure rubber band does not load in with the scene
+
+        // Initialize AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false; // Ensure sound does not immediately play when scene is loaded
     }
 
     void OnMouseEnter() {
@@ -59,6 +70,11 @@ public class Slingshot : MonoBehaviour {
         // Set up the rubber band with a LineRenderer component
         rubberBandLine.enabled = true; // Enable the rubber band line
         rubberBandAnchorPos = launchPoint.transform.position;
+
+        // Play the pulling sound
+        if (pullSound != null) {
+            audioSource.PlayOneShot(pullSound);
+        }
     }
 
     void Update() {
@@ -101,10 +117,10 @@ public class Slingshot : MonoBehaviour {
             FollowCam.SWITCH_VIEW(FollowCam.eView.slingshot);
             FollowCam.POI = projectile;
 
-            // Instantiate the projectile line (visual effect)
+            // Instantiate the projectile line
             Instantiate<GameObject>(projLinePrefab, projectile.transform);
 
-            // Clear rubber band visual
+            // Clear rubber band
             rubberBandLine.enabled = false;
 
             projectile = null;
