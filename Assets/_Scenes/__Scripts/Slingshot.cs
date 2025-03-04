@@ -28,12 +28,12 @@ public class Slingshot : MonoBehaviour {
         // Initialize the rubber band visual (LineRenderer)
         rubberBandLine = gameObject.AddComponent<LineRenderer>();
         rubberBandLine.material = new Material(Shader.Find("Sprites/Default"));
-        rubberBandLine.startWidth = 0.05f; // Adjust thickness
+        rubberBandLine.startWidth = 0.5f; // Start and end with different thicknesses to simulate an actual rubber band
         rubberBandLine.endWidth = 0.05f;
-        rubberBandLine.startColor = Color.black; // Adjust color
-        rubberBandLine.endColor = Color.black;
+        rubberBandLine.startColor = new Color(0.6f, 0.3f, 0.1f); // Set the color to brown to simulate an actual rubber band color
+        rubberBandLine.endColor = new Color(0.6f, 0.3f, 0.1f);
         rubberBandLine.positionCount = 2;
-        rubberBandLine.enabled = false; // Disable it initially
+        rubberBandLine.enabled = false; // Ensure rubber band does not load in with the scene
     }
 
     void OnMouseEnter() {
@@ -56,7 +56,7 @@ public class Slingshot : MonoBehaviour {
         // Disable physics on the projectile while aiming
         projectile.GetComponent<Rigidbody>().isKinematic = true;
 
-        // Set up the rubber band (LineRenderer)
+        // Set up the rubber band with a LineRenderer component
         rubberBandLine.enabled = true; // Enable the rubber band line
         rubberBandAnchorPos = launchPoint.transform.position;
     }
@@ -89,7 +89,7 @@ public class Slingshot : MonoBehaviour {
         if (Input.GetMouseButtonUp(0)) {
             aimingMode = false;
 
-            // Release the projectile and enable physics
+            // Release the projectile and enable Rigidbody physics
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
             projRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
