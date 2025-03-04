@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  // Import this for scene management
 
 public enum GameMode {
     idle,
@@ -54,7 +55,6 @@ public class MissionDemolition : MonoBehaviour {
         mode = GameMode.playing;
 
         FollowCam.SWITCH_VIEW( FollowCam.eView.both );
-
     }
 
     void UpdateGUI() {
@@ -63,8 +63,13 @@ public class MissionDemolition : MonoBehaviour {
     }
 
     void Update() {
-
         UpdateGUI();
+
+        if (shotsTaken > 10) {
+            // Switch to Game Over scene when shotsTaken exceeds 10
+            SceneManager.LoadScene("GameOver");
+            return;  // Ensure the rest of the code doesn't run after the scene switch
+        }
 
         if ((mode == GameMode.playing) && Goal.goalMet ) {
             mode = GameMode.levelEnd;
@@ -86,6 +91,11 @@ public class MissionDemolition : MonoBehaviour {
 
     static public void SHOT_FIRED() {
         S.shotsTaken++;
+
+        if (S.shotsTaken > 10) {
+            // Switch to Game Over scene when shotsTaken exceeds 10
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     static public GameObject GET_CASTLE() {
