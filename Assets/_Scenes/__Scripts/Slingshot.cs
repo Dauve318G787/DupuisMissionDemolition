@@ -76,6 +76,7 @@ public class Slingshot : MonoBehaviour {
             Instantiate<GameObject>(projLinePrefab, projectile.transform);
 
             projectile = null;
+            MissionDemolition.SHOT_FIRED();
         }
 
     }
