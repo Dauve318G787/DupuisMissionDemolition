@@ -79,8 +79,8 @@ public class MissionDemolition : MonoBehaviour {
         UpdateGUI();
 
         // GameOver scene switch logic
-        if (shotsTaken > 30) {
-            // Switch to Game Over scene when shotsTaken exceeds 10
+        if (shotsTaken > 29) {
+            // Switch to Game Over scene when shotsTaken exceeds 29 (off by one so technically 30 shots are allowed)
             SceneManager.LoadScene("GameOver");
             return;  // Ensure the rest of the code doesn't run after the scene switch
         }
@@ -103,8 +103,8 @@ public class MissionDemolition : MonoBehaviour {
         shotsTaken = 0;
     }
 
-    // Check if the player completed the 4th level with fewer than 25 shots
-    if (level == 4 && shotsTaken < 25) {
+    // Check if the player completed the 4th level with fewer than 15 shots
+    if (level == 4 && shotsTaken < 15) {
         SceneManager.LoadScene("GoodEnding");
     } else {
         StartLevel();
@@ -116,8 +116,8 @@ public class MissionDemolition : MonoBehaviour {
     static public void SHOT_FIRED() {
         S.shotsTaken++;
 
-        if (S.shotsTaken > 30) {
-            // Switch to Game Over scene when shotsTaken exceeds 10
+        if (S.shotsTaken > 29) {
+            // Switch to Game Over scene when shotsTaken hits 30
             SceneManager.LoadScene("GameOver");
         }
     }
