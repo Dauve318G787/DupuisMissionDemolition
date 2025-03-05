@@ -81,13 +81,20 @@ public class MissionDemolition : MonoBehaviour {
     }
 
     void NextLevel() {
-        level++;
-        if (level == levelMax) {
-            level = 0;
-            shotsTaken = 0;
-        }
-        StartLevel();
+    level++;
+    if (level == levelMax) {
+        level = 0;
+        shotsTaken = 0;
     }
+
+    // Check if the player completed the 4th level with fewer than 25 shots
+    if (level == 4 && shotsTaken < 25) {
+        SceneManager.LoadScene("GoodEnding");
+    } else {
+        SceneManager.LoadScene("Scene_0");
+    }
+}
+
 
     static public void SHOT_FIRED() {
         S.shotsTaken++;
