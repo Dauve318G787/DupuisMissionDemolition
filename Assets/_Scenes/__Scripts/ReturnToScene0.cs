@@ -1,10 +1,15 @@
+// MODULE PURPOSE:
+// This module contains logic for the button on the Good Ending screen
+// This script is near-identical to GameOverRestart.cs, save for the
+// class name, to avoid conflicts in the global namespace
+
+// Boilerplate Unity includes
 using UnityEngine;
 using UnityEngine.SceneManagement; // Import this for scene management
 using UnityEngine.UI; // Import this for button functionality
 
 public class ButtonReturnToSceneFromGoodEnding : MonoBehaviour
 {
-    public string sceneName = "_Scene_0"; // You can set the scene name in the Unity Inspector or hard-code it
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +28,6 @@ public class ButtonReturnToSceneFromGoodEnding : MonoBehaviour
     void OnButtonClick()
     {
         // Load the specified scene
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("_Scene_0");
     }
 }

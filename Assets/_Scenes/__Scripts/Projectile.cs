@@ -1,3 +1,9 @@
+// MODULE PURPOSE:
+// This script defines the logic for the projectile object
+// in Mission Demolition.
+
+
+// Boilerplate Unity includes
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +24,7 @@ public class Projectile : MonoBehaviour {
     }
 
     private Vector3 prevPos;
+    // This private List stores the histroy of Projectile's move distance
     private List<float> deltas = new List<float>();
     private Rigidbody rigid;
 
@@ -38,17 +45,21 @@ public class Projectile : MonoBehaviour {
         deltas.Add(deltaV3.magnitude);
         prevPos = transform.position;
 
+        // Limit lookback
         while( deltas.Count > LOOKBACK_COUNT ) {
             deltas.RemoveAt(0);
         }
 
+        // Iterate over deltas and find the largest one
         float maxDelta = 0;
 
         foreach ( float f in deltas ) {
             if (f > maxDelta ) maxDelta = f;
         }
 
+        // If the Projectile hasn't moved more than the sleepThreshold...
         if (maxDelta <= Physics.sleepThreshold) {
+            // Flip awake flag to false and therefore put the Rigidbody to sleep
             awake = false;
             rigid.Sleep();
         }

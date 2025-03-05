@@ -1,3 +1,8 @@
+// MODULE PURPOSE:
+// This module defines the logic for the line that trails behind
+// the projectile as it travels across the game map.
+
+// Boilerplate Unity includes
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +33,8 @@ void FixedUpdate() {
     if (_drawing) {
         _line.positionCount++;
         _line.SetPosition( _line.positionCount - 1, transform.position );
+        
+        // If the Rigidbody is sleeping, stop drawing
         if (_projectile != null ) {
             if (!_projectile.awake ) {
                 _drawing = false;
@@ -38,12 +45,16 @@ void FixedUpdate() {
 }
 
 private void OnDestroy() {
+    
+    // Remove ProjectileLine from PROJ_LINES
     PROJ_LINES.Remove(this);
+    
 }
 
 static void ADD_LINE( ProjectileLine newLine ) {
     Color col;
 
+    // Iterate through all old lines and dim them as game progresses
     foreach (ProjectileLine pl in PROJ_LINES ) {
         col = pl._line.startColor;
         col = col * DIM_MULT;

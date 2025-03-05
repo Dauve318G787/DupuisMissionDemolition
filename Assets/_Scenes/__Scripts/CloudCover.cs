@@ -1,3 +1,7 @@
+// MODULE PURPOSE:
+// This script controls the cloud cover in the Mission Demolition game.
+
+//Boilerplate includes for Unity work
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +25,7 @@ public class CloudCover : MonoBehaviour
 
         for(int i = 0; i < numClouds; i++) {
             
+            // Creat a new GameObject from scratch and get its Transform
             cloudGO = new GameObject();
             cloudTrans = cloudGO.transform;
             sRend = cloudGO.AddComponent<SpriteRenderer>();

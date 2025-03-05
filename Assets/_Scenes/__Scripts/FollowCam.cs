@@ -1,3 +1,8 @@
+// MODULE PURPOSE:
+// This module provides functionality for the camera
+// as it follows the projectile across the map.
+
+// Boilerplate includes for Unity
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +10,8 @@ using UnityEngine;
 public class FollowCam : MonoBehaviour {
 
     
-    static private FollowCam S;
-    static public GameObject POI;
+    static private FollowCam S; // Private Singleton
+    static public GameObject POI; // The static point of interest
     public enum eView { none, slingshot, castle, both };
 
     [Header("Inscribed")]
@@ -15,7 +20,7 @@ public class FollowCam : MonoBehaviour {
     public GameObject viewBothGO;
 
     [Header("Dynamic")]
-    public float camZ;
+    public float camZ; // The desired Z position of the camera
     public eView nextView = eView.slingshot;
 
     void Awake() {

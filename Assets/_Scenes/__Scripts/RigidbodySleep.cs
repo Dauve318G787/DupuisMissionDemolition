@@ -1,3 +1,8 @@
+// MODULE PURPOSE:
+// This module allows the Rigidbody that it is connected to to sleep
+// for a specified amount of time
+
+// Boilerplate Unity includes
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

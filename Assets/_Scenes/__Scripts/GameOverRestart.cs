@@ -1,10 +1,15 @@
+// MODULE PURPOSE:
+// This module contains logic for the button on the Game Over screen
+// This script is near-identical to ReturnToScene0.cs, save for the
+// class name, to avoid conflicts in the global namespace
+
+// Boilerplate Unity includes
 using UnityEngine;
-using UnityEngine.SceneManagement; // Import this for scene management
-using UnityEngine.UI; // Import this for button functionality
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonReturnToScene : MonoBehaviour
 {
-    public string sceneName = "_Scene_0"; // You can set the scene name in the Unity Inspector or hard-code it
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +27,7 @@ public class ButtonReturnToScene : MonoBehaviour
     // This method will be called when the button is clicked
     void OnButtonClick()
     {
-        // Load the specified scene
-        SceneManager.LoadScene(sceneName);
+        // Load _Scene_0
+        SceneManager.LoadScene("_Scene_0");
     }
 }

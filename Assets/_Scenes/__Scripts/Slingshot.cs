@@ -1,3 +1,8 @@
+// MODULE PURPOSE:
+// This script contains logic that governs the slingshot in-game.
+
+
+// Boilerplate Unity includes
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
